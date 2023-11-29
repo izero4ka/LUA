@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>4DC00D80</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"вх"</Description>
+      <GroupHeader>1</GroupHeader>
+      <Address/>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+Aobscan(_nametags, D9 80 80 00 00 00 8D 88 80 00 00 00 D9 41 08 DE D9 DF E0 F6 C4 41 ** ** D9 41 04 D9 41 0C )
+Registersymbol(enable_NamePlates)
+alloc(enable_NamePlates,4)
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+label(check)
+label(nametags)
+
+newmem:
+
+originalcode:
+db 8B 44 81 14 F6 40 06 01
+
+cmp byte ptr [enable_NamePlates],(int)1
+jne exit
+
+check:
+db 80 B8 8B 00 00 00 44
+jne exit
+
+nametags:
+db C6 40 06 01
+
+
+exit:
+jmp returnhere
+
+_nametags-A:
+jmp newmem
+nop
+nop
+nop
+returnhere:
+
+enable_NamePlates:
+dd 1
+
+[DISABLE]
+Aobscan(_nametags, D9 80 80 00 00 00 8D 88 80 00 00 00 D9 41 08 DE D9 DF E0 F6 C4 41 ** ** D9 41 04 D9 41 0C )
+Unregistersymbol(enable_NamePlates)
+dealloc(enable_NamePlates)
+dealloc(newmem)
+_nametags-A:
+db 8B 44 81 14 F6 40 06 01
+
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
