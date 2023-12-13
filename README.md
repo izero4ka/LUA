@@ -1,2 +1,2 @@
-# LUA
+# Script
 for cheat engine
